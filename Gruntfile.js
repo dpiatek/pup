@@ -7,7 +7,7 @@ module.exports = function(grunt) {
       options: { separator: ';' },
       dist: {
         src: ['js/**/*.js', '!js/vendor/**/*.js'],
-        dest: 'dist/<%= pkg.name %>.js'
+        dest: 'js/main.min.js'
       }
     },
 
@@ -34,6 +34,19 @@ module.exports = function(grunt) {
         console: true,
         window: true
       }
+    },
+
+    uglify: {
+      options: {
+        report: 'gzip',
+        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+                '<%= grunt.template.today("yyyy-mm-dd") %> */'
+      },
+      build: {
+        files: {
+          'js/main.min.js': ['<%= concat.dist.dest %>']
+        }
+      }
     }
 
   });
@@ -42,11 +55,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
 
-  grunt.registerTask('concat', ['concat']);
   grunt.registerTask('s', ['sass']);
 
-  grunt.registerTask('default', ['concat']);
+  grunt.registerTask('default', ['concat', 'uglify', 'jshint', 'sass' ]);
 
 };
 
