@@ -21,6 +21,18 @@ module.exports = function(grunt) {
       css: {
         files: ['css/**/*.scss'],
         tasks: ['sass']
+      },
+      js: {
+        files: ['js/**/*.js', '!js/vendor/*.js'],
+        tasks: ['jshint']
+      }
+    },
+
+    jshint: {
+      files: ['Gruntfile.js', 'js/**/*.js', '!js/vendor/*.js'],
+      globals: {
+        console: true,
+        window: true
       }
     }
 
@@ -29,6 +41,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   grunt.registerTask('concat', ['concat']);
   grunt.registerTask('s', ['sass']);
