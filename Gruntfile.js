@@ -6,7 +6,7 @@ module.exports = function(grunt) {
     concat: {
       options: { separator: ';' },
       dist: {
-        src: ['js/**/*.js', '!js/vendor/**/*.js'],
+        src: ['js/**/*.js', '!js/vendor/**/*.js', '!js/main.min.js'],
         dest: 'js/main.min.js'
       }
     },
@@ -29,10 +29,9 @@ module.exports = function(grunt) {
     },
 
     jshint: {
-      files: ['Gruntfile.js', 'js/**/*.js', '!js/vendor/*.js'],
-      globals: {
-        console: true,
-        window: true
+      files: ['Gruntfile.js', 'js/**/*.js', '!js/vendor/*.js', '!js/main.min.js'],
+      options: {
+        globals: { console: true }
       }
     },
 
