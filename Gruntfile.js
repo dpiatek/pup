@@ -12,15 +12,19 @@ module.exports = function(grunt) {
     },
 
     sass: {
-      dist: {
+      dev: {
         files: { 'css/main.css': 'css/main.scss' }
+      },
+      build: {
+        options: { style: 'compressed' },
+        files: { 'css/main.min.css': 'css/main.scss' }
       }
     },
 
     watch: {
       css: {
         files: ['css/**/*.scss'],
-        tasks: ['sass']
+        tasks: ['sass:dev']
       },
       js: {
         files: ['js/**/*.js', '!js/vendor/*.js'],
@@ -39,7 +43,7 @@ module.exports = function(grunt) {
       options: {
         report: 'gzip',
         banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-                '<%= grunt.template.today("yyyy-mm-dd") %> */'
+                'Built: <%= grunt.template.today("yyyy-mm-dd") %> */'
       },
       build: {
         files: {
@@ -58,7 +62,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('s', ['sass']);
 
-  grunt.registerTask('default', ['concat', 'uglify', 'jshint', 'sass' ]);
+  grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'sass:build']);
 
 };
 
