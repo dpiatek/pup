@@ -4,8 +4,11 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     browserify: {
-      'js/main.js': ['js/**/*.js', '!js/main.js']
-    }
+      basic: {
+        src: ['js/**/*.js'],
+        dest: 'js/main.min.js'
+      }
+    },
 
     sass: {
       dev: {
@@ -54,8 +57,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-browserify');
 
   grunt.registerTask('s', ['sass']);
+  grunt.registerTask('b', ['browserify:basic']);
 
   grunt.registerTask('default', ['jshint', 'uglify', 'sass:build']);
 
