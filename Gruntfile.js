@@ -93,6 +93,7 @@ module.exports = function(grunt) {
   grunt.registerTask('s', ['sass:dev']);
   grunt.registerTask('b', ['browserify:dev']);
   grunt.registerTask('c', ['clean']);
+  grunt.registerTask('test', ['karma']);
 
   grunt.registerTask('default', ['jshint', 'browserify:dev', 'sass:dev']);
   grunt.registerTask('build', ['copy:build', 'browserify', 'uglify', 'sass:build']);
