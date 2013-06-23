@@ -4,30 +4,25 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     browserify: {
-      basic: {
-        src: ['js/**/*.js'],
-        dest: 'js/main.min.js'
-      }
-    },
-
-    sass: {
       dev: {
-        files: { 'css/main.css': 'css/main.scss' }
+        src: ['js/**/*.js', '!js/main.min.js'],
+        dest: 'js/main.min.js'
       },
       build: {
-        options: { style: 'compressed' },
-        files: { 'css/main.min.css': 'css/main.scss' }
+        src: ['js/**/*.js', '!js/main.min.js'],
+        dest: 'build/js/main.min.js'
       }
     },
 
-    watch: {
-      css: {
-        files: ['css/**/*.scss'],
-        tasks: ['sass:dev']
+    uglify: {
+      options: {
+        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+                'Built: <%= grunt.template.today("yyyy-mm-dd") %> */'
       },
-      js: {
-        files: ['js/**/*.js'],
-        tasks: ['jshint']
+      build: {
+        files: {
+          'build/js/main.min.js': 'js/main.min.js'
+        }
       }
     },
 
@@ -38,18 +33,39 @@ module.exports = function(grunt) {
       }
     },
 
-    uglify: {
-      options: {
-        report: 'gzip',
-        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-                'Built: <%= grunt.template.today("yyyy-mm-dd") %> */'
+    sass: {
+      dev: {
+        files: { 'css/main.css': 'css/main.scss' }
       },
       build: {
-        files: {
-          'js/main.min.js': 'js/main.js'
-        }
+        options: { style: 'compressed' },
+        files: { 'build/css/main.min.css': 'css/main.scss' }
       }
-    }
+    },
+
+    copy: {
+      build: {
+        files: [
+          {
+            src: ['index.html'],
+            dest: 'build/'
+          }
+        ]
+      }
+    },
+
+    clean: ['build/**/*'],
+
+    watch: {
+      css: {
+        files: ['css/**/*.scss'],
+        tasks: ['sass:dev']
+      },
+      js: {
+        files: ['js/**/*.js'],
+        tasks: ['browserify:dev', 'jshint']
+      }
+    },
 
   });
 
@@ -57,12 +73,17 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-browserify');
 
-  grunt.registerTask('s', ['sass']);
-  grunt.registerTask('b', ['browserify:basic']);
+  grunt.registerTask('h', ['jshint']);
+  grunt.registerTask('s', ['sass:dev']);
+  grunt.registerTask('b', ['browserify:dev']);
+  grunt.registerTask('c', ['clean']);
 
-  grunt.registerTask('default', ['jshint', 'uglify', 'sass:build']);
+  grunt.registerTask('default', ['jshint', 'browserify:dev', 'sass:dev']);
+  grunt.registerTask('build', ['copy:build', 'browserify', 'uglify', 'sass:build']);
 
 };
 
