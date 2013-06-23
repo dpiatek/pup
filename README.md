@@ -1,12 +1,13 @@
 pup
 ===
 
-A [grunt]() boilerplate for web projects. 
-Testing (karma + jasmine), builds (uglify), module loading (browserify), linting (jshint), SASS. 
+A [grunt](http://gruntjs.com/) + plugins boilerplate for web projects. 
+Testing ([karma](http://karma-runner.github.io/0.8/index.html) + [jasmine](http://pivotal.github.io/jasmine/)), builds ([uglify](https://github.com/mishoo/UglifyJS)), module loading ([browserify](http://browserify.org/)), linting ([jshint](http://www.jshint.com/)), [SASS](http://sass-lang.com/). 
 
-## Installation
+### Installation
 
-You will need [node.js]() and [grunt-cli]().
+You will need [node.js](http://nodejs.org/) and [grunt-cli](http://gruntjs.com/getting-started).
+
 Remove the .git repo
 
 ````
@@ -18,9 +19,7 @@ Install dependencies
 npm install
 ````
 
-Use [bower]() to pull in your favourite libraries.
-
-## Usage
+### Usage
 
 Watch files
 ````
@@ -40,7 +39,7 @@ grunt test
 etc
 
 
-## Todo:
+### Todo:
 - deployments
 - live-reload
 - time stamp builds
