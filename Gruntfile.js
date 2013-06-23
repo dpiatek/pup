@@ -3,13 +3,9 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-    concat: {
-      options: { separator: ';' },
-      dist: {
-        src: ['js/**/*.js'],
-        dest: 'js/main.min.js'
-      }
-    },
+    browserify: {
+      'js/main.js': ['js/**/*.js', '!js/main.js']
+    }
 
     sass: {
       dev: {
@@ -47,14 +43,13 @@ module.exports = function(grunt) {
       },
       build: {
         files: {
-          'js/main.min.js': ['<%= concat.dist.dest %>']
+          'js/main.min.js': 'js/main.js'
         }
       }
     }
 
   });
 
-  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -62,7 +57,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('s', ['sass']);
 
-  grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'sass:build']);
+  grunt.registerTask('default', ['jshint', 'uglify', 'sass:build']);
 
 };
 
