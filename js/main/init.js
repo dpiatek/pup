@@ -1,4 +1,2 @@
-var $ = require('../../components/jquery/jquery.js');
-var body = $('body');
-
-console.log(body);
+var jQuery = require('../../components/jquery/jquery.js');
+console.log(jQuery);

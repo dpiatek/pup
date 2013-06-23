@@ -14,7 +14,8 @@
     "grunt-contrib-uglify": "~0.2.0",
     "grunt-browserify": "~1.1.1",
     "grunt-contrib-clean": "~0.4.1",
-    "grunt-contrib-copy": "~0.4.1"
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-karma": "~0.4.4"
   },
   "author": "dpiatek",
   "license": "MIT"

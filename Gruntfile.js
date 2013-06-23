@@ -26,8 +26,15 @@ module.exports = function(grunt) {
       }
     },
 
+    karma: {
+      unit: {
+        configFile: 'karma.conf.js',
+        background: true
+      }
+    },
+
     jshint: {
-      files: ['Gruntfile.js', 'js/**/*.js'],
+      files: ['js/**/*.js', '!js/main.min.js'],
       options: {
         globals: { console: true }
       }
@@ -62,8 +69,12 @@ module.exports = function(grunt) {
         tasks: ['sass:dev']
       },
       js: {
-        files: ['js/**/*.js'],
+        files: ['js/**/*.js', '!js/main.min.js'],
         tasks: ['browserify:dev', 'jshint']
+      },
+      karma: {
+        files: ['js/main.min.js'],
+        tasks: ['karma:unit:run']
       }
     },
 
@@ -76,6 +87,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-karma');
 
   grunt.registerTask('h', ['jshint']);
   grunt.registerTask('s', ['sass:dev']);
