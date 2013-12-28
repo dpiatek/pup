@@ -1,0 +1,25 @@
+{
+  "name": "pup",
+  "version": "0.0.1",
+  "description": "A boilerplate for static websites.",
+  "main": "index.html",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dpiatek/pup.git"
+  },
+  "keywords": [
+    "boilerplate"
+  ],
+  "author": "@dominikpiatek",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dpiatek/pup/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.8.0"
+  }
+}
