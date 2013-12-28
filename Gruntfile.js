@@ -4,6 +4,13 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+    watch: {
+      src: {
+        files: ['js/**/*.js', 'css/**/*.scss'],
+        tasks: ['jshint', 'sass']
+      }
+    },
+
     jshint: {
       src: [
         'js/**/*.js',
@@ -24,6 +31,7 @@ module.exports = function(grunt) {
   // Load plugins
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Tasks
   grunt.registerTask('default', []);
