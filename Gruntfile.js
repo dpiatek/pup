@@ -27,6 +27,18 @@ module.exports = function(grunt) {
           'css/main.css': 'css/main.scss'
         }
       }
+    },
+
+    preprocess: {
+      build: {
+        src: 'index.html',
+        options: {
+          inline: true,
+          context: {
+            APP_DEV: false
+          }
+        }
+      }
     }
 
   });
@@ -35,8 +47,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-preprocess');
 
   // Tasks
-  grunt.registerTask('default', []);
+  grunt.registerTask('default', ['watch']);
+  grunt.registerTask('build', ['preprocess:build']);
 
 };
