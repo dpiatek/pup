@@ -9,12 +9,21 @@ module.exports = function(grunt) {
         'js/**/*.js',
         'Gruntfile.js'
       ]
+    },
+
+    sass: {
+      src: {
+        files: {
+          'css/main.css': 'css/main.scss'
+        }
+      }
     }
 
   });
 
   // Load plugins
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-sass');
 
   // Tasks
   grunt.registerTask('default', []);
