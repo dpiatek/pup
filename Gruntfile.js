@@ -39,6 +39,12 @@ module.exports = function(grunt) {
           }
         }
       }
+    },
+
+    karma: {
+      unit: {
+        configFile: 'karma.conf.js'
+      }
     }
 
   });
@@ -48,9 +54,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-preprocess');
+  grunt.loadNpmTasks('grunt-karma');
 
   // Tasks
   grunt.registerTask('default', ['watch']);
+  grunt.registerTask('test', ['karma']);
   grunt.registerTask('build', ['preprocess:build']);
 
 };
