@@ -81,6 +81,16 @@ module.exports = function(grunt) {
       }
     },
 
+    concat: {
+      build: {
+        src: [
+          'bower_components/handlebars/handlebars.min.js',
+          'js/main.js'
+        ],
+        dest: 'build/js/main.js'
+      }
+    },
+
   });
 
   // Load plugins
