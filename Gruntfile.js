@@ -91,18 +91,32 @@ module.exports = function(grunt) {
       }
     },
 
+    clean: ['build']
+
   });
 
   // Load plugins
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-preprocess');
   grunt.loadNpmTasks('grunt-karma');
+
+  grunt.loadNpmTasks('grunt-preprocess');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-imagemin');
+  grunt.loadNpmTasks('grunt-contrib-concat');
 
   // Tasks
   grunt.registerTask('default', ['watch']);
   grunt.registerTask('test', ['karma']);
-  grunt.registerTask('build', ['preprocess:build']);
+  grunt.registerTask('build', [
+    'clean',
+    'copy',
+    'preprocess:build',
+    'imagemin',
+    'concat',
+    'sass:build'
+  ]);
 
 };
