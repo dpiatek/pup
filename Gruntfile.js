@@ -53,7 +53,23 @@ module.exports = function(grunt) {
       unit: {
         configFile: 'karma.conf.js'
       }
-    }
+    },
+
+    copy: {
+      main: {
+        src: ['index.html'],
+        dest: 'build/'
+      },
+      js: {
+        expand: true,
+        flatten: true,
+        src: [
+          'bower_components/jquery/jquery.min.js'
+        ],
+        dest: 'build/js/vendor/'
+      }
+    },
+
 
   });
 
